@@ -1,0 +1,42 @@
+.login__container{
+    margin-top: 10vh;
+}
+
+.login__input {
+    display: block;
+    margin: 10px auto;
+    width: 80%;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+}
+
+.login__form{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.dark__input{
+    background-color: #3f4749;
+    color: #f1f2f6;
+}
+
+.light__input{
+  background-color: #dfe4ea;  
+  color: #2d3436;
+}
+
+.margin__center {
+    margin: 0 auto !important;
+}
+
+.light_theme{
+    color: #2d3436;
+}
+
+.dark_theme{
+    color: #f1f2f6;
+
+}
