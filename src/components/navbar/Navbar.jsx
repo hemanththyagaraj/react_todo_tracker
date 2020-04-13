@@ -4,17 +4,12 @@ import {
   AppBar,
   Toolbar,
   Typography,
-  Badge,
   MenuItem,
   IconButton,
   Menu,
   Avatar,
 } from "@material-ui/core";
-import MailIcon from "@material-ui/icons/Mail";
-import MoreIAccountCirclecon from "@material-ui/icons";
 import MoreIcon from "@material-ui/icons/MoreVert";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import NotificationsIcon from "@material-ui/icons/Notifications";
 import { ThemeContext } from "../../contexts/ThemeContext";
 
 const useStyles = makeStyles((theme) => ({

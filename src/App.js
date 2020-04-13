@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import ThemeContextProvider from "./contexts/ThemeContext";
 import BASE from "./components/base/base";
