@@ -9,8 +9,13 @@ import {
   Menu,
   Avatar,
 } from "@material-ui/core";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import { ThemeContext } from "../../contexts/ThemeContext";
+import { AuthContext } from "../../contexts/AuthContext";
+import "./Navbar.css";
+import CustomButton from "../customButton/CustomButton";
+import { auth } from "../../firebase.utils";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -38,10 +43,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Navbar() {
-  const { isLight, light, dark } = useContext(ThemeContext);
-  const theme = isLight ? light : dark;
   const classes = useStyles();
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const { isLight, light, dark } = useContext(ThemeContext);
+  const theme = isLight ? light : dark;
+  const { isAuthenticated, displayName, photoURL } = useContext(AuthContext);
 
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -51,6 +57,10 @@ export default function Navbar() {
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
+  };
+
+  const handleSignout = () => {
+    auth.signOut();
   };
 
   const renderMobileMenu = (
@@ -63,12 +73,12 @@ export default function Navbar() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <Avatar
-          alt="Remy Sharp"
-          src="https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-          className={classes.small}
-        />
-        <p>Hemanth</p>
+        <Avatar alt="Remy Sharp" src={photoURL} className={classes.small} />
+        <p className="displayname__mobile">{displayName}</p>
+      </MenuItem>
+      <MenuItem>
+        <ExitToAppIcon style={{ color: "#ff5252" }} />
+        <p className="displayname__mobile">Logout</p>
       </MenuItem>
     </Menu>
   );
@@ -78,16 +88,23 @@ export default function Navbar() {
       <AppBar position="static" style={{ backgroundColor: theme.ui }}>
         <Toolbar>
           <Typography className={classes.title} variant="h5" noWrap>
-            TODO
+            <IconButton edge="end" aria-haspopup="true" color="inherit">
+              <Avatar alt="Remy Sharp" src={photoURL} />
+            </IconButton>
           </Typography>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton edge="end" aria-haspopup="true" color="inherit">
-              <Avatar
-                alt="Remy Sharp"
-                src="https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-              />
-            </IconButton>
+            {isAuthenticated ? (
+              <CustomButton
+                textColor={isLight ? dark.text : light.text}
+                color={isLight ? dark.ui : light.ui}
+                onClick={handleSignout}
+              >
+                Logout
+              </CustomButton>
+            ) : (
+              ""
+            )}
           </div>
           <div className={classes.sectionMobile}>
             <IconButton

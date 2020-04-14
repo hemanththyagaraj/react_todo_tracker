@@ -57,28 +57,47 @@
   justify-content: space-between;
 }
 
-.quotes__container{
-    width: 80%;
-    margin: 20px auto;
+.quotes__container {
+  width: 90%;
+  margin: 20px auto;
 }
 
 @media only screen and (max-width: 992px) {
-    .login__container {
-      margin-top: 8vh;
-    }
-
-    .login__form--title{
-        font-size: 26px;
-    }
+  .login__container {
+    margin-top: 6vh;
   }
-  
+
+  .login__form--title {
+    font-size: 26px;
+  }
+
+  .quotes__container {
+    margin: 40px auto;
+    height: 80px;
+  }
+
+  .login__input {
+    padding: 7px 14px;
+    font-size: 14px;
+  }
+}
 
 @media only screen and (max-width: 600px) {
   .login__container {
-    margin-top: 5vh;
+    margin-top: 3vh;
   }
 
-  .login__form--title{
-      font-size: 16px;
+  .login__form--title {
+    font-size: 16px;
+  }
+
+  .quotes__container {
+    margin: 40px auto;
+    height: 60px;
+  }
+
+  .login__input {
+    padding: 5px 10px;
+    font-size: 12px;
   }
 }

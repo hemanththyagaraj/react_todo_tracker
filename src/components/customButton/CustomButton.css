@@ -1,6 +1,10 @@
 .custom__button {
     font-size: 16px !important;
-    border: 200px !important;
+    outline: none;
+}
+
+.custom__button:hover{
+    cursor: pointer;
 }
 
 @media only screen and (max-width:992px) {
