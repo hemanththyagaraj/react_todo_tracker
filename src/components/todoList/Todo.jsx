@@ -1,11 +1,16 @@
-import React from 'react'
+import React, { useContext } from "react";
+import "./TodoList.css";
+import { ThemeContext } from "../../contexts/ThemeContext";
 
 const Todo = () => {
-    return (
-        <div style={{ border : '1px solid red' }}>
-            hello
-        </div>
-    )
-}
+  const { isLight } = useContext(ThemeContext);
+  return (
+    <div className={`todo ${isLight ? "todo__light" : "todo__dark"}`}>
+      <p className='todo__name'>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+      </p>
+    </div>
+  );
+};
 
-export default Todo
+export default Todo;

@@ -1,0 +1,28 @@
+.todo {
+  width: 40%;
+  margin: 20px auto;
+  padding: 10px 15px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+.todo__name {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.todo:hover {
+  text-decoration: line-through;
+  cursor: pointer;
+}
+
+.todo__dark {
+  background-color: #3f4749;
+  color: #f1f2f6;
+}
+
+.todo__light {
+  background-color: #dfe4ea;
+  color: #2d3436;
+}

@@ -10,9 +10,6 @@ const Todos = () => {
   const theme = isLight ? light : dark;
   return (
     <div className="todo__page--container">
-      <Typography align="center" variant="h5" style={{ color: theme.text }}>
-        Add New Task
-      </Typography>
       <Grid container>
         <Grid item xs={12} sm={12} md={12}>
           <AddTodo />
