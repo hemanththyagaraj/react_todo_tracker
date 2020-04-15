@@ -1,13 +1,28 @@
-import React, { useContext } from "react";
-import { Typography, Grid, Card } from "@material-ui/core";
-import { ThemeContext } from "../../contexts/ThemeContext";
+import React, { useEffect, useContext } from "react";
+import { Grid } from "@material-ui/core";
 import AddTodo from "../../components/addTodo/addTodo";
-import "./todos.css";
 import TodoList from "../../components/todoList/TodoList";
+import { fireStore } from "../../firebase.utils";
+import { TodosContext } from "../../contexts/TodosContext";
+import "./todos.css";
 
 const Todos = () => {
-  const { isLight, light, dark } = useContext(ThemeContext);
-  const theme = isLight ? light : dark;
+  const { dispatch } = useContext(TodosContext);
+
+  useEffect(() => {
+    getTodos();
+  }, []);
+
+  const getTodos = async () => {
+    const collections = fireStore.collection("todos");
+    const docs = collections.onSnapshot((snapshot) => {
+      const docs = snapshot.docs.map((doc) => {
+        return { ...doc.data(), id: doc.id };
+      });
+      dispatch({ type: "GET_TODOS", payload: docs });
+    });
+  };
+
   return (
     <div className="todo__page--container">
       <Grid container>

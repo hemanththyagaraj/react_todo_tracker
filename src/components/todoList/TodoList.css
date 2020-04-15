@@ -1,5 +1,5 @@
 .todo {
-  width: 40%;
+  width: 50%;
   margin: 20px auto;
   padding: 10px 15px;
   border-radius: 5px;
@@ -7,9 +7,10 @@
 }
 
 .todo__name {
-    font-size: 22px;
-    font-weight: bold;
-    text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
 }
 
 .todo:hover {
@@ -25,4 +26,37 @@
 .todo__light {
   background-color: #dfe4ea;
   color: #2d3436;
+}
+
+.no__todos {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.color__dark {
+  color: #dfe4ea;
+}
+
+.color__light {
+  color: #2d3436;
+}
+
+@media only screen and (max-width: 992px) {
+  .todo {
+    width: 70%;
+  }
+
+  .todo__name {
+    font-size: 18px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .todo {
+    width: 80%;
+  }
+
+  .todo__name {
+    font-size: 14px;
+  }
 }

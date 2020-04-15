@@ -5,3 +5,21 @@
 .displayname__mobile {
     margin-left: 10px;
 }
+
+.nav__list {
+    list-style: none;
+}
+
+.nav__list--item {
+    display: inline-block;
+    margin: 0px 10px;
+    font-size: 18px;
+}
+
+.nav__dark {
+    color: #f1f2f6;
+}
+
+.nav__light {
+    color: #2d3436;
+}

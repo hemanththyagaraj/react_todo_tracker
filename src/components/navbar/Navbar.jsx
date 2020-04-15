@@ -8,6 +8,8 @@ import {
   IconButton,
   Menu,
   Avatar,
+  Switch,
+  FormControlLabel,
 } from "@material-ui/core";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import MoreIcon from "@material-ui/icons/MoreVert";
@@ -32,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
   sectionMobile: {
     display: "flex",
+    color: "grey",
     [theme.breakpoints.up("md")]: {
       display: "none",
     },
@@ -45,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Navbar() {
   const classes = useStyles();
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  const { isLight, light, dark } = useContext(ThemeContext);
+  const { isLight, light, dark, dispatch } = useContext(ThemeContext);
   const theme = isLight ? light : dark;
   const { isAuthenticated, displayName, photoURL } = useContext(AuthContext);
 
@@ -63,6 +66,23 @@ export default function Navbar() {
     auth.signOut();
   };
 
+  const getFirstName = () => {
+    let firstName = "";
+    if (displayName) {
+      firstName = displayName.split(" ")[0];
+    }
+    return firstName;
+  };
+
+  const handleThemeToggle = (event) => {
+    const { checked } = event.target;
+    if (checked) {
+      dispatch({ type: "DARK" });
+    } else {
+      dispatch({ type: "LIGHT" });
+    }
+  };
+
   const renderMobileMenu = (
     <Menu
       anchorEl={mobileMoreAnchorEl}
@@ -74,10 +94,16 @@ export default function Navbar() {
     >
       <MenuItem>
         <Avatar alt="Remy Sharp" src={photoURL} className={classes.small} />
-        <p className="displayname__mobile">{displayName}</p>
+        <p className="displayname__mobile">{getFirstName()}</p>
       </MenuItem>
       <MenuItem>
-        <ExitToAppIcon style={{ color: "#ff5252" }} />
+        <FormControlLabel
+          control={<Switch checked={!isLight} onChange={handleThemeToggle} />}
+          label="Dark Mode"
+        />
+      </MenuItem>
+      <MenuItem onClick={handleSignout}>
+        <ExitToAppIcon style={{ color: "#2d3436" }} />
         <p className="displayname__mobile">Logout</p>
       </MenuItem>
     </Menu>
@@ -94,17 +120,34 @@ export default function Navbar() {
           </Typography>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            {isAuthenticated ? (
-              <CustomButton
-                textColor={isLight ? dark.text : light.text}
-                color={isLight ? dark.ui : light.ui}
-                onClick={handleSignout}
+            <div>
+              <ul
+                className={`nav__list ${isLight ? "nav__light" : "nav__dark"}`}
               >
-                Logout
-              </CustomButton>
-            ) : (
-              ""
-            )}
+                <li className="nav__list--item">{getFirstName()}</li>
+                <li className="nav__list--item">
+                  <FormControlLabel
+                    control={
+                      <Switch checked={!isLight} onChange={handleThemeToggle} />
+                    }
+                    label="Dark Mode"
+                  />
+                </li>
+                <li className="nav__list--item">
+                  {isAuthenticated ? (
+                    <CustomButton
+                      textColor={isLight ? dark.text : light.text}
+                      color={isLight ? dark.ui : light.ui}
+                      onClick={handleSignout}
+                    >
+                      Logout
+                    </CustomButton>
+                  ) : (
+                    ""
+                  )}
+                </li>
+              </ul>
+            </div>
           </div>
           <div className={classes.sectionMobile}>
             <IconButton

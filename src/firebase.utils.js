@@ -23,4 +23,18 @@ export const signInWithGoogle = () => {
   auth.signInWithPopup(provider);
 };
 
+export const deleteDocument = (id, onSuccess, onError) => {
+  debugger;
+  fireStore
+    .collection("todos")
+    .doc(id)
+    .delete()
+    .then(() => {
+      onSuccess("Successfully deleted the document");
+    })
+    .catch((err) => {
+      onError(err);
+    });
+};
+
 export default firebase;
